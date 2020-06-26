@@ -45,6 +45,7 @@ class TestRoom < MiniTest::Test
     def test_add_to_playlist()
         @songs.each { |song| @room_2.add_to_playlist(song) }
         assert_equal(2, @room_2.playlist.length())
+        assert(@room_2.playlist.include?(@song_1))
     end
 
 end
