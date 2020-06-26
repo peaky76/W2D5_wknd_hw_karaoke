@@ -11,4 +11,7 @@ class Room
         @guests << guest
     end
 
+    def clear()
+        @guests.clear()
+    end
 end
