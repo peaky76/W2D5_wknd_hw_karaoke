@@ -56,4 +56,14 @@ class TestRoom < MiniTest::Test
         assert(@room_1.is_full?)
     end
 
+    def test_refuse_entry_if_full()
+        # Add first four guests
+        @initial_guests.each { |guest| @room_1.admit_guest(guest) }
+        @room_1.admit_guest(@guest_4)
+        # Add fifth guest (exceeds capacity)
+        @room_1.admit_guest(@guest_5)
+        # Check fifth guest not added to guests in room
+        refute(@room_1.guests.include?(@guest_5))        
+    end
+
 end

@@ -10,7 +10,7 @@ class Room
     end
 
     def admit_guest(guest)
-        @guests << guest
+        @guests << guest if !is_full?
     end
 
     def clear()
