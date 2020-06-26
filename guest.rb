@@ -21,4 +21,12 @@ class Guest
         return price <= @cash
     end
 
+    def rate_playlist(room)
+        if room.playlist_contains?(@fav_song)
+            p "Yes! Get in!"
+        else
+            p "WTF is this shite? I want to sing #{@fav_song.title}!"
+        end
+    end
+
 end

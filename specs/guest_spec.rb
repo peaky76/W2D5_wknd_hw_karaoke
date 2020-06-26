@@ -10,15 +10,15 @@ Minitest::Reporters.use! Minitest::Reporters::SpecReporter.new()
 class TestGuest < MiniTest::Test
 
     def setup()
-        @guest_1 = Guest.new("Ali", 20, @song_1)
-        @guest_2 = Guest.new("Bobby", 30, @song_1)
-        @guest_3 = Guest.new("Charlie", 40, @song_1)
         @song_1 = Song.new("Blur", "Song 2", "Wooo-hooo!")
         @song_2 = Song.new("U2", "One", "Is it getting better?...")
         @song_3 = Song.new("Four Tops", "Reach Out (I'll Be There)", "If you feel like you can't go on...")
         @song_4 = Song.new("Three Tenors", "Nessun Dorma", "Nessun dorma, nessun dorma...")
-        @songs = [@song_1, @song_2, @song_3, @song_4]
         @room_1 = Room.new("Voodoo", 4, 7.50)
+        @playlist_songs = [@song_1, @song_2, @song_3]
+        @guest_1 = Guest.new("Ali", 20, @song_2)
+        @guest_2 = Guest.new("Bobby", 30, @song_3)
+        @guest_3 = Guest.new("Charlie", 40, @song_4)
     end
 
     def test_guest_has_name()
@@ -30,7 +30,7 @@ class TestGuest < MiniTest::Test
     end
 
     def test_guest_has_fav_song()
-        assert_equal("Blur", @guest_1.fav_song.artist)
+        assert_equal("U2", @guest_1.fav_song.artist)
     end
 
     def test_guest_pay()
@@ -53,8 +53,14 @@ class TestGuest < MiniTest::Test
         assert(40, @guest_3.cash)
     end
 
-    def test_view_playlist()
-        
+    def test_rate_playlist_good()
+        @playlist_songs.each { |song| @room_1.add_to_playlist(song) }
+        assert_output(/Yes! Get in!/) { @guest_2.rate_playlist(@room_1) }
+    end
+
+    def test_rate_playlist_bad()
+        @playlist_songs.each { |song| @room_1.add_to_playlist(song) }
+        assert_output(/WTF is this shite\? I want to sing Nessun Dorma!/) { @guest_3.rate_playlist(@room_1) }
     end
 
     def test_sing()
