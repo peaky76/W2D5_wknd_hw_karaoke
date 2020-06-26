@@ -113,13 +113,22 @@ class TestRoom < MiniTest::Test
     end
 
     def test_is_time_to_leave_true()
-        20.times { @room_1.play(@song_2) } 
+        # Song 3 length = 3 * 20 = 60 minute limit
+        20.times { @room_1.play(@song_3) } 
         assert(@room_1.is_time_to_leave?)
     end
 
     def test_is_time_to_leave_false()
+        # Song 1 length = 2 * 20 < 60 minute limit
         20.times { @room_1.play(@song_1) } 
         refute(@room_1.is_time_to_leave?)
     end
 
+    def test_will_not_play_if_time_is_up()
+        # Play 60 minutes of songs
+        20.times { @room_1.play(@song_3) }
+        # Check "back to bar" msg displays and no-one is left in room
+        assert_output(/Time's up, guys. Please make your way back to the main bar./) { @room_1.play(@song_2) }
+        assert_equal(0, @room_1.guests.count)
+    end
 end

@@ -54,11 +54,12 @@ class Room
     end
 
     def play(song)
-        # if is_time_to_leave?
-        #     p "Time's up, guys. Please make your way back to the main bar."
-        #     clear()
-        # else
-             @session_clock += song.duration
+        if is_time_to_leave?()
+            p "Time's up, guys. Please make your way back to the main bar."
+            clear()
+        else
+            @session_clock += song.duration
+        end
     end
     
 end
