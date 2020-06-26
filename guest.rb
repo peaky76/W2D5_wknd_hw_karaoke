@@ -8,6 +8,7 @@ class Guest
     end
 
     def pay(amount)
+        return if !can_pay?(amount)
         @cash -= amount
     end
 
