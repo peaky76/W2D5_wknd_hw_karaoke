@@ -25,6 +25,12 @@ class TestRoom < MiniTest::Test
     def test_admit_guests()
         @guests.each { |guest| @room_1.admit_guest(guest) }
         assert_equal(3, @room_1.guests.count())
+        assert(@room_1.guests.include?(@guest_1))
     end
+
+    # def test_admit_guests()
+    #     @guests.each { |guest| @room_1.admit_guest(guest) }
+    #     assert_equal(3, @room_1.guests.count())
+    # end
 
 end
