@@ -7,4 +7,8 @@ class Guest
         @cash = cash
     end
 
+    def pay(amount)
+        @cash -= amount
+    end
+
 end
