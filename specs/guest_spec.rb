@@ -33,11 +33,6 @@ class TestGuest < MiniTest::Test
         assert_equal("U2", @guest_1.fav_song.artist)
     end
 
-    def test_guest_pay()
-        @guest_2.pay(10)
-        assert_equal(20, @guest_2.cash)
-    end
-    
     def test_guest_can_pay_true()
         assert(@guest_1.can_pay?(19.99))
     end
@@ -46,6 +41,11 @@ class TestGuest < MiniTest::Test
         refute(@guest_1.can_pay?(20.01))
     end
 
+    def test_guest_pay()
+        @guest_2.pay(10)
+        assert_equal(20, @guest_2.cash)
+    end
+    
     def test_guest_pay_not_possible_if_guest_can_pay_false()
         # Guest tries to pay for something that they can't afford
         @guest_3.pay(50)
@@ -54,6 +54,6 @@ class TestGuest < MiniTest::Test
     end
 
     def test_sing()
-        assert_output(/Ali: Wooo-hooo!/) { @guest_1.sing(@song_1).chomp() }
+        assert_output(/Ali: Wooo-hooo!/) { @guest_1.sing(@song_1) }
     end
 end

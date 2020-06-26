@@ -13,10 +13,10 @@ class TestRoom < MiniTest::Test
         @room_1 = Room.new("Voodoo", 4, 7.50)
         @room_2 = Room.new("Java", 6, 5)
         @room_3 = Room.new("Africa", 10, 5)
-        @song_1 = Song.new("Blur", "Song 2", "Wooo-hooo!")
-        @song_2 = Song.new("U2", "One", "Is it getting better?...")
-        @song_3 = Song.new("Four Tops", "Reach Out (I'll Be There)", "If you feel like you can't go on...")
-        @song_4 = Song.new("Three Tenors", "Nessun Dorma", "Nessun dorma, nessun dorma...")
+        @song_1 = Song.new("Blur", "Song 2", "Wooo-hooo!", 2)
+        @song_2 = Song.new("U2", "One", "Is it getting better?...", 4)
+        @song_3 = Song.new("Four Tops", "Reach Out (I'll Be There)", "If you feel like you can't go on...", 3)
+        @song_4 = Song.new("Three Tenors", "Nessun Dorma", "Nessun dorma, nessun dorma...", 2)
         @playlist_songs = [@song_1, @song_2, @song_3]
         @guest_1 = Guest.new("Ali", 10, @song_1)
         @guest_2 = Guest.new("Bobby", 15, @song_2)
@@ -102,8 +102,14 @@ class TestRoom < MiniTest::Test
     end
 
     def test_playlist_reaction_bad()
-#        @playlist_songs.each { |song| @room_1.add_to_playlist(song) }
+        @playlist_songs.each { |song| @room_1.add_to_playlist(song) }
         assert_output(/WTF is this shite\? I wanted to sing Nessun Dorma!/) { @room_1.get_playlist_reaction(@guest_4) }
+    end
+
+    def test_play_song()
+        @room_1.play(@song_2)
+        @room_1.play(@song_3)
+        assert_equal(7, @room_1.session_clock)
     end
 
 end

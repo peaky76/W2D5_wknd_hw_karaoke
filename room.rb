@@ -1,6 +1,6 @@
 class Room
 
-    attr_reader :name, :capacity, :price, :guests, :playlist
+    attr_reader :name, :capacity, :price, :guests, :playlist, :session_clock
 
     def initialize(name, capacity, price_per_person_per_hour)
         @name = name
@@ -8,6 +8,7 @@ class Room
         @price = price_per_person_per_hour
         @guests = []
         @playlist = []
+        @session_clock = 0
     end
 
     def admit_guest(guest)
@@ -48,4 +49,8 @@ class Room
         return @playlist.include?(song)
     end
 
+    def play(song)
+        @session_clock += song.duration
+    end
+    
 end
