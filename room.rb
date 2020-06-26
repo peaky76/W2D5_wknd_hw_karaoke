@@ -11,7 +11,10 @@ class Room
     end
 
     def admit_guest(guest)
-        @guests << guest if !is_full?
+        if !is_full?
+            charge_guest(guest)
+            @guests << guest
+        end    
     end
 
     def charge_guest(guest)
