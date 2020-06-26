@@ -98,12 +98,12 @@ class TestRoom < MiniTest::Test
 
     def test_playlist_reaction_good()
         @playlist_songs.each { |song| @room_1.add_to_playlist(song) }
-        assert_output(/Yes! Get in!/) { @room_1.get_playlist_reaction(@guest_2) }
+        assert_output(/Yes! Get in! I love One/) { @room_1.get_playlist_reaction(@guest_2) }
     end
 
     def test_playlist_reaction_bad()
 #        @playlist_songs.each { |song| @room_1.add_to_playlist(song) }
-        assert_output(/WTF is this shite\? I want to sing Nessun Dorma!/) { @room_1.get_playlist_reaction(@guest_4) }
+        assert_output(/WTF is this shite\? I wanted to sing Nessun Dorma!/) { @room_1.get_playlist_reaction(@guest_4) }
     end
 
 end

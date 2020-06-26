@@ -32,10 +32,11 @@ class Room
     end
 
     def get_playlist_reaction(guest)
+        song_title = guest.fav_song.title
         if playlist_contains?(guest.fav_song)
-            p "#{guest.name}: Yes! Get in!"
+            p "#{guest.name}: Yes! Get in! I love #{song_title}"
         else
-            p "#{guest.name}: WTF is this shite? I want to sing #{guest.fav_song.title}!"
+            p "#{guest.name}: WTF is this shite? I wanted to sing #{song_title}!"
         end
     end
 

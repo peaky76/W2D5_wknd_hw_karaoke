@@ -8,8 +8,8 @@ Minitest::Reporters.use! Minitest::Reporters::SpecReporter.new()
 class TestSong < MiniTest::Test
 
     def setup()
-        @song_1 = Song.new("Blur", "Song 2", "Wooo-hooo!")
-        @song_2 = Song.new("U2", "One", "Is it getting better?...")
+        @song_1 = Song.new("Blur", "Song 2", "Wooo-hooo!", 2)
+        @song_2 = Song.new("U2", "One", "Is it getting better?...", 4)
     end
 
     def test_has_artist()
@@ -22,6 +22,10 @@ class TestSong < MiniTest::Test
 
     def test_has_lyric()
         assert_equal("Wooo-hooo!", @song_1.lyric)
+    end
+
+    def test_has_duration()
+        assert_equal(2, @song_1.duration)
     end
 
 end
