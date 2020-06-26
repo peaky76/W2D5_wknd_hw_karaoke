@@ -112,4 +112,14 @@ class TestRoom < MiniTest::Test
         assert_equal(7, @room_1.session_clock)
     end
 
+    def test_is_time_to_leave_true()
+        20.times { @room_1.play(@song_2) } 
+        assert(@room_1.is_time_to_leave?)
+    end
+
+    def test_is_time_to_leave_false()
+        20.times { @room_1.play(@song_1) } 
+        refute(@room_1.is_time_to_leave?)
+    end
+
 end

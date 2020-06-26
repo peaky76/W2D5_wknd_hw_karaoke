@@ -45,12 +45,20 @@ class Room
         return @guests.count >= @capacity
     end
 
+    def is_time_to_leave?()
+        return @session_clock >= 60
+    end
+
     def playlist_contains?(song)
         return @playlist.include?(song)
     end
 
     def play(song)
-        @session_clock += song.duration
+        # if is_time_to_leave?
+        #     p "Time's up, guys. Please make your way back to the main bar."
+        #     clear()
+        # else
+             @session_clock += song.duration
     end
     
 end
