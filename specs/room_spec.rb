@@ -10,9 +10,9 @@ Minitest::Reporters.use! Minitest::Reporters::SpecReporter.new()
 class TestRoom < MiniTest::Test
 
     def setup()
-        @room_1 = Room.new("Voodoo", 4)
-        @room_2 = Room.new("Java", 6)
-        @room_3 = Room.new("Africa", 10)
+        @room_1 = Room.new("Voodoo", 4, 7.50)
+        @room_2 = Room.new("Java", 6, 5)
+        @room_3 = Room.new("Africa", 10, 5)
         @guest_1 = Guest.new("Ali")
         @guest_2 = Guest.new("Bobby")
         @guest_3 = Guest.new("Charlie")
@@ -26,6 +26,14 @@ class TestRoom < MiniTest::Test
 
     def test_room_has_name()
         assert_equal("Voodoo", @room_1.name)
+    end
+
+    def test_room_has_capacity()
+        assert_equal(6, @room_2.capacity)
+    end
+
+    def test_room_has_price()
+        assert_equal(5, @room_3.price)
     end
 
     def test_admit_guests()
