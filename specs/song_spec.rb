@@ -1,7 +1,7 @@
 require('minitest/autorun')
 require('minitest/reporters')
 
-require_relative(‘../song’)
+require_relative('../song')
 
 Minitest::Reporters.use! Minitest::Reporters::SpecReporter.new()
 

@@ -1,7 +1,7 @@
 require('minitest/autorun')
 require('minitest/reporters')
 
-require_relative(‘../room’)
+require_relative('../room')
 
 Minitest::Reporters.use! Minitest::Reporters::SpecReporter.new()
 
