@@ -11,4 +11,12 @@ class Guest
         @cash -= amount
     end
 
+    def sing(song)
+        p "#{@name}: #{song.lyric}".chomp()
+    end
+
+    def can_pay?(price)
+        return price <= @cash
+    end
+
 end
