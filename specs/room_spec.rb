@@ -42,6 +42,11 @@ class TestRoom < MiniTest::Test
         assert(@room_1.guests.include?(@guest_1))
     end
 
+    def test_admit_guest_charges_guest()
+        @initial_guests.each { |guest| @room_1.admit_guest(guest) }
+        assert_equal(12.50, @guest_3.cash)
+    end
+
     def test_charge_guest()
         @room_1.charge_guest(@guest_1)
         assert_equal(2.50, @guest_1.cash)
