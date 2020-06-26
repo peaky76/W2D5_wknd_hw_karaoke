@@ -14,6 +14,10 @@ class Room
         @guests << guest if !is_full?
     end
 
+    # def charge_guest(guest)
+        
+    # end
+
     def clear()
         @guests.clear()
     end
