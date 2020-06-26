@@ -15,7 +15,7 @@ class Room
     end
 
     def charge_guest(guest)
-        guest.cash -= @price        
+        guest.pay(@price)        
     end
 
     def clear()
