@@ -13,15 +13,17 @@ class TestRoom < MiniTest::Test
         @room_1 = Room.new("Voodoo", 4, 7.50)
         @room_2 = Room.new("Java", 6, 5)
         @room_3 = Room.new("Africa", 10, 5)
-        @guest_1 = Guest.new("Ali", 10)
-        @guest_2 = Guest.new("Bobby", 15)
-        @guest_3 = Guest.new("Charlie", 20)
-        @guest_4 = Guest.new("Dee", 25)
-        @guest_5 = Guest.new("Eddie", 30)
+        @song_1 = Song.new("Blur", "Song 2", "Wooo-hooo!")
+        @song_2 = Song.new("U2", "One", "Is it getting better?...")
+        @song_3 = Song.new("Four Tops", "Reach Out (I'll Be There)", "If you feel like you can't go on...")
+        @song_4 = Song.new("Three Tenors", "Nessun Dorma", "Nessun dorma, nessun dorma...")
+        @songs = [@song_1, @song_2, @song_3, @song_4]
+        @guest_1 = Guest.new("Ali", 10, @song_1)
+        @guest_2 = Guest.new("Bobby", 15, @song_2)
+        @guest_3 = Guest.new("Charlie", 20, @song_3)
+        @guest_4 = Guest.new("Dee", 25, @song_4)
+        @guest_5 = Guest.new("Eddie", 30, nil)
         @initial_guests = [@guest_1, @guest_2, @guest_3]
-        @song_1 = Song.new("Blur", "Song 2")
-        @song_2 = Song.new("U2", "One")
-        @songs = [@song_1, @song_2]
     end
 
     def test_room_has_name()
@@ -64,8 +66,18 @@ class TestRoom < MiniTest::Test
 
     def test_add_to_playlist()
         @songs.each { |song| @room_2.add_to_playlist(song) }
-        assert_equal(2, @room_2.playlist.length)
+        assert_equal(4, @room_2.playlist.length)
         assert(@room_2.playlist.include?(@song_1))
+    end
+
+    def test_playlist_contains_song_true()
+        @songs.each { |song| @room_2.add_to_playlist(song) }
+        assert(@room_2.playlist_contains?(@song_1))
+    end
+
+    def test_playlist_contains_song_false()
+        @room_3.add_to_playlist(@song_1)
+        refute(@room_3.playlist_contains?(@song_2))
     end
 
     def test_room_is_full()

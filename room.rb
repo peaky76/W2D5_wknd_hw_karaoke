@@ -33,4 +33,8 @@ class Room
         return @guests.count >= @capacity
     end
 
+    def playlist_contains?(song)
+        return @playlist.include?(song)
+    end
+
 end
