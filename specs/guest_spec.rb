@@ -53,16 +53,6 @@ class TestGuest < MiniTest::Test
         assert(40, @guest_3.cash)
     end
 
-    def test_rate_playlist_good()
-        @playlist_songs.each { |song| @room_1.add_to_playlist(song) }
-        assert_output(/Yes! Get in!/) { @guest_2.rate_playlist(@room_1) }
-    end
-
-    def test_rate_playlist_bad()
-        @playlist_songs.each { |song| @room_1.add_to_playlist(song) }
-        assert_output(/WTF is this shite\? I want to sing Nessun Dorma!/) { @guest_3.rate_playlist(@room_1) }
-    end
-
     def test_sing()
         assert_output(/Ali: Wooo-hooo!/) { @guest_1.sing(@song_1).chomp() }
     end

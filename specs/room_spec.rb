@@ -17,7 +17,7 @@ class TestRoom < MiniTest::Test
         @song_2 = Song.new("U2", "One", "Is it getting better?...")
         @song_3 = Song.new("Four Tops", "Reach Out (I'll Be There)", "If you feel like you can't go on...")
         @song_4 = Song.new("Three Tenors", "Nessun Dorma", "Nessun dorma, nessun dorma...")
-        @songs = [@song_1, @song_2, @song_3, @song_4]
+        @playlist_songs = [@song_1, @song_2, @song_3]
         @guest_1 = Guest.new("Ali", 10, @song_1)
         @guest_2 = Guest.new("Bobby", 15, @song_2)
         @guest_3 = Guest.new("Charlie", 20, @song_3)
@@ -65,13 +65,13 @@ class TestRoom < MiniTest::Test
     end
 
     def test_add_to_playlist()
-        @songs.each { |song| @room_2.add_to_playlist(song) }
-        assert_equal(4, @room_2.playlist.length)
+        @playlist_songs.each { |song| @room_2.add_to_playlist(song) }
+        assert_equal(3, @room_2.playlist.length)
         assert(@room_2.playlist.include?(@song_1))
     end
 
     def test_playlist_contains_song_true()
-        @songs.each { |song| @room_2.add_to_playlist(song) }
+        @playlist_songs.each { |song| @room_2.add_to_playlist(song) }
         assert(@room_2.playlist_contains?(@song_1))
     end
 
@@ -94,6 +94,16 @@ class TestRoom < MiniTest::Test
         @room_1.admit_guest(@guest_5)
         # Check fifth guest not added to guests in room
         refute(@room_1.guests.include?(@guest_5))        
+    end
+
+    def test_playlist_reaction_good()
+        @playlist_songs.each { |song| @room_1.add_to_playlist(song) }
+        assert_output(/Yes! Get in!/) { @room_1.get_playlist_reaction(@guest_2) }
+    end
+
+    def test_playlist_reaction_bad()
+#        @playlist_songs.each { |song| @room_1.add_to_playlist(song) }
+        assert_output(/WTF is this shite\? I want to sing Nessun Dorma!/) { @room_1.get_playlist_reaction(@guest_4) }
     end
 
 end

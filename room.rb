@@ -12,7 +12,9 @@ class Room
 
     def admit_guest(guest)
         if !is_full?
+            # Get fee
             charge_guest(guest)
+            # Add guest to the array of people in the room
             @guests << guest
         end    
     end
@@ -27,6 +29,14 @@ class Room
 
     def add_to_playlist(song)
         @playlist << song
+    end
+
+    def get_playlist_reaction(guest)
+        if playlist_contains?(guest.fav_song)
+            p "#{guest.name}: Yes! Get in!"
+        else
+            p "#{guest.name}: WTF is this shite? I want to sing #{guest.fav_song.title}!"
+        end
     end
 
     def is_full?()
